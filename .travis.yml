@@ -12,9 +12,8 @@ matrix:
     env: NPM_INSTALL_PACKAGES=standard NPM_RUN_SCRIPT=test-standard-coverage
   - node_js: "0.10"
     env: NPM_INSTALL_PACKAGES=promise-polyfill
-env: NPM_INSTALL_PACKAGES= NPM_RUN_SCRIPT=test
 install:
 - npm install
 - if [ -n "$NPM_INSTALL_PACKAGES" ]; then npm install $NPM_INSTALL_PACKAGES; fi
 script:
-- npm run $NPM_RUN_SCRIPT
+- npm run ${NPM_RUN_SCRIPT:-test}
