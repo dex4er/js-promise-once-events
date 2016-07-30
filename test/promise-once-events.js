@@ -3,9 +3,11 @@
 var t = require('tap')
 var PromiseOnceEvents = require('../lib/promise-once-events')
 
+var TIMEOUT = 10000
+
 t.plan(2)
 
-t.test('On event with callback', function (t) {
+t.test('On event with callback', {timeout: TIMEOUT}, function (t) {
   t.plan(4)
 
   var ev = new PromiseOnceEvents()
@@ -26,7 +28,7 @@ t.test('On event with callback', function (t) {
   ev.emit('event', 'arg1', 'arg2')
 })
 
-t.test('On event without callback', function (t) {
+t.test('On event without callback', {timeout: TIMEOUT}, function (t) {
   t.plan(1)
 
   var ev = new PromiseOnceEvents()

@@ -25,7 +25,7 @@
     "tap": "^6.2.0"
   },
   "scripts": {
-    "test": "tap --timeout 20 test/*.js",
+    "test": "tap --timeout 30 test/*.js",
     "test-coverage": "tap --coverage --timeout 120 test/*.js",
     "test-standard": "standard",
     "test-standard-coverage": "npm run test-standard && npm run test-coverage"
