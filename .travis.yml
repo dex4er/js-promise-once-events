@@ -8,7 +8,7 @@ matrix:
   - node_js: "4"
   - node_js: "0.12"
   - node_js: "0.10"
-    env: NPM_INSTALL_PACKAGES=promise-polyfill
+    env: NPM_INSTALL_PACKAGES=es6-promise
 install:
 - npm install
 - if [ -n "$NPM_INSTALL_PACKAGES" ]; then npm install $NPM_INSTALL_PACKAGES; fi
