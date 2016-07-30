@@ -1,0 +1,29 @@
+{
+  "name": "promise-once-events",
+  "version": "0.0.1",
+  "description": "Return promise for events.once",
+  "main": "lib/promise-once-events.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dex4er/js-promise-once-events"
+  },
+  "keywords": [
+    "promise",
+    "events"
+  ],
+  "author": "Piotr Roszatycki",
+  "license": "Artistic-2.0",
+  "bugs": {
+    "url": "https://github.com/dex4er/js-promise-once-events/issues"
+  },
+  "homepage": "http://github.com/dex4er/js-promise-once-events",
+  "dependencies": {},
+  "devDependencies": {
+    "tap": "^6.2.0"
+  },
+  "scripts": {
+    "test": "tap --timeout 300 test/*.js",
+    "test-coverage": "tap --coverage --timeout 600 test/*.js",
+    "test-standard-coverage": "standard && tap --coverage --timeout 600 test/*.js"
+  }
+}
