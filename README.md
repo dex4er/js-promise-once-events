@@ -1,6 +1,6 @@
 ## promise-once-events
 
-[![Build Status](https://secure.travis-ci.org/dex4er/js-promise-once-events.svg)](http://travis-ci.org/dex4er/js-promise-once-events)
+[![Build Status](https://secure.travis-ci.org/dex4er/js-promise-once-events.svg)](http://travis-ci.org/dex4er/js-promise-once-events) [![Coverage Status](https://coveralls.io/repos/github/dex4er/js-promise-once-events/badge.svg)](https://coveralls.io/github/dex4er/js-promise-once-events)
 
 This library provides promisified version of standard `events` class. The API is
 the same as for standard event emmiter except `once` method which returns
