@@ -1,6 +1,6 @@
 {
   "name": "promise-once-events",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Return promise for events.once method",
   "main": "lib/promise-once-events.js",
   "repository": {

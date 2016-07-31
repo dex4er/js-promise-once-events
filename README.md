@@ -6,6 +6,12 @@ This library provides promisified version of standard `events` class. The API is
 the same as for standard event emmiter except `once` method which returns
 `Promise` object which is fulfilled when `emit` method is called.
 
+### Installation
+
+```shell
+npm install promise-once-events
+```
+
 ### Usage
 
 `promise-once-events` can be a base class for custom event emitter.
@@ -44,9 +50,14 @@ emitter.once('event', (a, b, resolve) => {
   // resolve promise
   resolve('passed')
 }).then((result) => {
-  // result is object Arguments
   console.log('promise is fulfilled with result:', result)
 })
 
 emitter.emit('event', 'a', 'b')
 ```
+
+### License
+
+Copyright (c) 2016 Piotr Roszatycki <piotr.roszatycki@gmail.com>
+
+[Artistic License 2.0](https://opensource.org/licenses/Artistic-2.0)

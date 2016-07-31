@@ -18,7 +18,6 @@ emitter.once('event', (a, b, resolve) => {
   // resolve promise
   resolve('passed')
 }).then((result) => {
-  // result is object Arguments
   console.log('promise is fulfilled with result:', result)
 })
 
