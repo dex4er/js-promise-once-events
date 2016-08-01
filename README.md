@@ -1,8 +1,8 @@
 ## promise-once-events
 
-[![Build Status](https://secure.travis-ci.org/dex4er/js-promise-once-events.svg)](http://travis-ci.org/dex4er/js-promise-once-events) [![Coverage Status](https://coveralls.io/repos/github/dex4er/js-promise-once-events/badge.svg)](https://coveralls.io/github/dex4er/js-promise-once-events) [![npm](https://img.shields.io/npm/v/promise-once-events.svg?maxAge=2592000)](https://www.npmjs.com/package/promise-once-events)
+[![Build Status](https://secure.travis-ci.org/dex4er/js-promise-once-events.svg)](http://travis-ci.org/dex4er/js-promise-once-events) [![Coverage Status](https://coveralls.io/repos/github/dex4er/js-promise-once-events/badge.svg)](https://coveralls.io/github/dex4er/js-promise-once-events) [![npm](https://img.shields.io/npm/v/promise-once-events.svg)](https://www.npmjs.com/package/promise-once-events)
 
-This library provides promisified version of standard `events` class. The API is
+This module provides promisified version of standard `events` class. The API is
 the same as for standard event emmiter except `once` method which returns
 `Promise` object which is fulfilled when `emit` method is called.
 
@@ -54,6 +54,19 @@ emitter.once('event', (a, b, resolve) => {
 })
 
 emitter.emit('event', 'a', 'b')
+```
+
+### Promise
+
+This module uses `any-promise` and any ES6 Promise library or polyfill is
+supported.
+
+Ie. `bluebird` can be used as Promise library for this module, if it is
+registered before.
+
+```js
+require('any-promise/register/bluebird')
+const PromiseOnceEvents = require('promise-once-events')
 ```
 
 ### License
