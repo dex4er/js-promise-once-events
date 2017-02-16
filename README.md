@@ -6,6 +6,11 @@ This module provides promisified version of standard `events` class. The API is
 the same as for standard event emmiter except `once` method which returns
 `Promise` object which is fulfilled when `emit` method is called.
 
+### Requirements
+
+This module requires ES6 with Node >= 4. For Node < 6 `--harmony` flag is
+required.
+
 ### Installation
 
 ```shell
