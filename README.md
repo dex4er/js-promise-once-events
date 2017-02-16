@@ -35,9 +35,9 @@ called and then result is an `Arguments` object which contains arguments from
 
 ```js
 // As promise
-emitter.once('event').then((result) => {
+emitter.once('event').then(result => {
   // result is object Arguments
-  console.log('an event occurred with arguments:', Array.prototype.slice.call(result))
+  console.log('an event occurred with arguments:', result)
 })
 
 emitter.emit('event', 'a', 'b')
@@ -54,7 +54,7 @@ emitter.once('event', (a, b, resolve) => {
   console.log('an event occurred with arguments:', [a, b])
   // resolve promise
   resolve('passed')
-}).then((result) => {
+}).then(result => {
   console.log('promise is fulfilled with result:', result)
 })
 
@@ -63,11 +63,11 @@ emitter.emit('event', 'a', 'b')
 
 ### Promise
 
-This module uses `any-promise` and any ES6 Promise library or polyfill is
-supported.
+This module uses [any-promise](https://www.npmjs.com/package/any-promise) and
+any ES6 Promise library or polyfill is supported.
 
-Ie. `bluebird` can be used as Promise library for this module, if it is
-registered before.
+Ie. [bluebird](https://www.npmjs.com/package/bluebird) can be used as Promise
+library for this module, if it is registered before.
 
 ```js
 require('any-promise/register/bluebird')
@@ -76,6 +76,6 @@ const PromiseOnceEvents = require('promise-once-events')
 
 ### License
 
-Copyright (c) 2016 Piotr Roszatycki <piotr.roszatycki@gmail.com>
+Copyright (c) 2016-2017 Piotr Roszatycki <piotr.roszatycki@gmail.com>
 
 [Artistic License 2.0](https://opensource.org/licenses/Artistic-2.0)
