@@ -22,8 +22,8 @@
   },
   "devDependencies": {
     "nyc": "^10.1.2",
-    "standard": "^7.1.2",
-    "tap": "^6.3.0"
+    "standard": "^8.6.0",
+    "tap": "^10.1.1"
   },
   "scripts": {
     "test": "tap --timeout 30 test/*.js",
