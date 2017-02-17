@@ -21,13 +21,19 @@
     "any-promise": "^1.3.0"
   },
   "devDependencies": {
+    "nyc": "^10.1.2",
     "standard": "^7.1.2",
     "tap": "^6.3.0"
   },
   "scripts": {
     "test": "tap --timeout 30 test/*.js",
-    "test-coverage": "tap --coverage --timeout 120 test/*.js",
+    "test-coverage": "nyc tap --timeout 120 test/*.js",
     "test-standard": "standard",
     "test-standard-coverage": "npm run test-standard && npm run test-coverage"
+  },
+  "nyc": {
+    "exclude": [
+      "test"
+    ]
   }
 }
