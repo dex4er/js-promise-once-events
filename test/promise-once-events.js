@@ -1,45 +1,67 @@
 'use strict'
 
-const t = require('tap')
 const PromiseOnceEvents = require('../lib/promise-once-events')
 
-const TIMEOUT = 10000
+/* global Feature, Scenario, Given, When, Then */
+const t = require('tap')
+require('tap-given')(t)
+require('chai').should()
 
-t.plan(2)
+Feature('Test promise-once-events module', () => {
+  Scenario('On event with callback', function () {
+    Given('PromiseOnceEvents object', () => {
+      this.ev = new PromiseOnceEvents()
+    })
 
-t.test('On event with callback', {timeout: TIMEOUT}, t => {
-  t.plan(4)
+    Given('callback for event', () => {
+      this.callback = (arg1, arg2, resolve) => {
+        this.arg1 = arg1
+        this.arg2 = arg2
+        this.resolve = resolve
+        resolve('result')
+      }
+    })
 
-  const ev = new PromiseOnceEvents()
+    When('subscribed once for event with promise and callback', () => {
+      this.promise = this.ev.once('event', this.callback)
+    })
 
-  const promise = ev.once('event', (arg1, arg2, resolve) => {
-    t.equal(arg1, 'arg1', 'Received event with correct arg1')
-    t.equal(arg2, 'arg2', 'Received event with correct arg2')
-    t.type(resolve, 'function', 'Received event with resolve callback')
-    resolve('result')
+    When('even is emitted with arguments', () => {
+      this.ev.emit('event', 'arg1', 'arg2')
+    })
+
+    Then('promise is fulfilled with correct result', () => {
+      return this.promise
+      .then(result => {
+        result.should.equal('result')
+      })
+    })
+
+    Then('callback has been called with correct arguments', () => {
+      this.arg1.should.equal('arg1')
+      this.arg2.should.equal('arg2')
+      this.resolve.should.be.a('function')
+    })
   })
 
-  promise.then(result => {
-    t.equal(result, 'result', 'Fulfilled promise with correct result')
-  }).then(() => {
-    t.end()
+  Scenario('On event without callback', () => {
+    Given('PromiseOnceEvents object', () => {
+      this.ev = new PromiseOnceEvents()
+    })
+
+    When('subscribed once for event with promise without callback', () => {
+      this.promise = this.ev.once('event')
+    })
+
+    When('even is emitted with arguments', () => {
+      this.ev.emit('event', 'arg1', 'arg2')
+    })
+
+    Then('promise is fulfilled with arguments as result', () => {
+      return this.promise
+      .then(result => {
+        result.should.deep.equal(['arg1', 'arg2'])
+      })
+    })
   })
-
-  ev.emit('event', 'arg1', 'arg2')
-})
-
-t.test('On event without callback', {timeout: TIMEOUT}, t => {
-  t.plan(1)
-
-  const ev = new PromiseOnceEvents()
-
-  const promise = ev.once('event')
-
-  promise.then(result => {
-    t.same(result, ['arg1', 'arg2'], 'Fulfilled promise with correct result')
-  }).then(() => {
-    t.end()
-  })
-
-  ev.emit('event', 'arg1', 'arg2')
 })

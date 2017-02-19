@@ -78,4 +78,4 @@ const PromiseOnceEvents = require('promise-once-events')
 
 Copyright (c) 2016-2017 Piotr Roszatycki <piotr.roszatycki@gmail.com>
 
-[Artistic License 2.0](https://opensource.org/licenses/Artistic-2.0)
+[MIT](https://opensource.org/licenses/MIT)
