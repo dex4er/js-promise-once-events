@@ -68,6 +68,26 @@ emitter.once('event', (a, b) => {
 emitter.emit('event', 'a', 'b')
 ```
 
+#### Overriding EventEmitter
+
+`PromiseOnceEvents` can be used as a replacement for `EventEmitter` for existing
+objects.
+
+**Example:**
+
+```js
+const readable = fs.createReadStream(process.argv[2] || __filename)
+
+readable.once = PromiseOnceEvents.prototype.once
+
+readable.on('data', (chunk) => {
+  console.log(`Received ${chunk.length} bytes of data.`)
+})
+
+await readable.once('end')
+console.log('There will be no more data.')
+```
+
 ### Promise
 
 This module uses [any-promise](https://www.npmjs.com/package/any-promise) and
