@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.2.0 2017-03-06
+
+  * `PromiseOnceEvents` is compatible with `EventEmitter`: if `once` method has
+    callback as argument then original non-promisified version is used.
+
 ## v0.1.0 2017-02-17
 
   * ES6

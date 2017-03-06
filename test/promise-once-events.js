@@ -1,50 +1,49 @@
 'use strict'
 
-const PromiseOnceEvents = require('../lib/promise-once-events')
-
 /* global Feature, Scenario, Given, When, Then */
 const t = require('tap')
 require('tap-given')(t)
-require('chai').should()
+
+const chai = require('chai')
+const chaiAsPromised = require('chai-as-promised')
+chai.use(chaiAsPromised)
+chai.should()
 
 Feature('Test promise-once-events module', () => {
-  Scenario('On event with callback', function () {
+  const PromiseOnceEvents = require('../lib/promise-once-events')
+
+  Scenario('Once event with callback', function () {
     Given('PromiseOnceEvents object', () => {
       this.ev = new PromiseOnceEvents()
     })
 
     Given('callback for event', () => {
-      this.callback = (arg1, arg2, resolve) => {
+      this.callback = (arg1, arg2, done) => {
         this.arg1 = arg1
         this.arg2 = arg2
-        this.resolve = resolve
-        resolve('result')
+        done()
       }
     })
 
-    When('subscribed once for event with promise and callback', () => {
-      this.promise = this.ev.once('event', this.callback)
+    When('subscribed once for event with callback', () => {
+      this.result = this.ev.once('event', this.callback)
     })
 
-    When('even is emitted with arguments', () => {
-      this.ev.emit('event', 'arg1', 'arg2')
+    When('even is emitted with arguments and another callback', done => {
+      this.ev.emit('event', 'arg1', 'arg2', done)
     })
 
-    Then('promise is fulfilled with correct result', () => {
-      return this.promise
-      .then(result => {
-        result.should.equal('result')
-      })
+    Then('result is an instance of the same class', () => {
+      this.result.should.be.an.instanceOf(PromiseOnceEvents)
     })
 
     Then('callback has been called with correct arguments', () => {
       this.arg1.should.equal('arg1')
       this.arg2.should.equal('arg2')
-      this.resolve.should.be.a('function')
     })
   })
 
-  Scenario('On event without callback', () => {
+  Scenario('Once event as promised', function () {
     Given('PromiseOnceEvents object', () => {
       this.ev = new PromiseOnceEvents()
     })
@@ -58,10 +57,7 @@ Feature('Test promise-once-events module', () => {
     })
 
     Then('promise is fulfilled with arguments as result', () => {
-      return this.promise
-      .then(result => {
-        result.should.deep.equal(['arg1', 'arg2'])
-      })
+      return this.promise.should.eventually.deep.equal(['arg1', 'arg2'])
     })
   })
 })

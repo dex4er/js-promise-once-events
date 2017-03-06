@@ -3,13 +3,17 @@
 [![Build Status](https://secure.travis-ci.org/dex4er/js-promise-once-events.svg)](http://travis-ci.org/dex4er/js-promise-once-events) [![Coverage Status](https://coveralls.io/repos/github/dex4er/js-promise-once-events/badge.svg)](https://coveralls.io/github/dex4er/js-promise-once-events) [![npm](https://img.shields.io/npm/v/promise-once-events.svg)](https://www.npmjs.com/package/promise-once-events)
 
 This module provides promisified version of standard `events` class. The API is
-the same as for standard event emmiter except `once` method which returns
-`Promise` object which is fulfilled when `emit` method is called.
+the same as for standard [`EventEmitter`](https://nodejs.org/api/events.html),
+except
+[`once`](https://nodejs.org/api/events.html#events_emitter_once_eventname_listener)
+method returns [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
+object which is fulfilled when
+[`emit`](https://nodejs.org/api/events.html#events_emitter_emit_eventname_args)
+method is called.
 
 ### Requirements
 
-This module requires ES6 with Node >= 4. For Node < 6 `--harmony` flag is
-required.
+This module requires Node >= 4. For Node < 6 `--harmony` flag is required.
 
 ### Installation
 
@@ -43,19 +47,22 @@ emitter.once('event').then(result => {
 emitter.emit('event', 'a', 'b')
 ```
 
-If the last argument for `once` method is a callback then the callback is run
-when `emit` method is called. Arguments of callback contain arguments from
-`emit` method and additional `resolve` callback which fulfills `Promise`.
+It also works with `async`/`await` syntax:
 
 ```js
+// As promise
+result = await emitter.once('event')
+// result is object Arguments
+console.log('an event occurred with arguments:', result)
+```
 
+If the last argument for `once` method is a callback then it works as for
+original `EventEmitter.once` method.
+
+```js
 // With callback
-emitter.once('event', (a, b, resolve) => {
+emitter.once('event', (a, b) => {
   console.log('an event occurred with arguments:', [a, b])
-  // resolve promise
-  resolve('passed')
-}).then(result => {
-  console.log('promise is fulfilled with result:', result)
 })
 
 emitter.emit('event', 'a', 'b')
