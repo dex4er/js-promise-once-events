@@ -2,9 +2,9 @@
 
 [![Build Status](https://secure.travis-ci.org/dex4er/js-promise-once-events.svg)](http://travis-ci.org/dex4er/js-promise-once-events) [![Coverage Status](https://coveralls.io/repos/github/dex4er/js-promise-once-events/badge.svg)](https://coveralls.io/github/dex4er/js-promise-once-events) [![npm](https://img.shields.io/npm/v/promise-once-events.svg)](https://www.npmjs.com/package/promise-once-events)
 
-This module provides promisified version of standard `events` class. The API is
-the same as for standard [`EventEmitter`](https://nodejs.org/api/events.html),
-except
+This module provides promisified version of standard
+[`EventEmitter`](https://nodejs.org/api/events.html) class,
+except that
 [`once`](https://nodejs.org/api/events.html#events_emitter_once_eventname_listener)
 method returns [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
 object which is fulfilled when
@@ -51,7 +51,7 @@ It also works with `async`/`await` syntax:
 
 ```js
 // As promise
-result = await emitter.once('event')
+const result = await emitter.once('event')
 // result is object Arguments
 console.log('an event occurred with arguments:', result)
 ```
@@ -73,7 +73,7 @@ emitter.emit('event', 'a', 'b')
 `PromiseOnceEvents` can be used as a replacement for `EventEmitter` for existing
 objects.
 
-**Example:**
+_Example:_
 
 ```js
 const readable = fs.createReadStream(process.argv[2] || __filename)
